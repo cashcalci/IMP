@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zayn INR AED USDT Profit Calculator</title>
+
+<style>
+:root {
+    --bg: #0b1020;
+    --panel: #141c30;
+    --line: #293650;
+    --text: #eef3ff;
+    --muted: #9ba9c2;
+    --accent: #67e8c2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 28px 16px;
+    background: radial-gradient(ellipse at top, #1b2b48, #0b1020 58%);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+.wrap {
+    width: min(760px, 100%);
+    margin: auto;
+}
+
+header {
+    margin-bottom: 22px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 8px 0;
+}
+
+.sub {
+    color: var(--muted);
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    margin: 14px 0;
+}
+
+.section-title {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.num {
+    display: inline-grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    border-radius: 9px;
+    background: #233a50;
+    color: var(--accent);
+    margin-right: 5px;
+}
+
+.field {
+    margin: 14px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #cbd6e9;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #34445f;
+    border-radius: 11px;
+    background: #0b1425;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--accent);
+}
+
+.result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid #2b4057;
+    border-radius: 11px;
+    background: #0b1728;
+    margin-top: 10px;
+}
+
+.result span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.result strong {
+    font-size: 18px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.finals {
+    padding: 19px;
+    border: 1px solid #397c70;
+    border-radius: 16px;
+    background: #12332f;
+    margin-top: 18px;
+}
+
+.finals h2 {
+    font-size: 18px;
+}
+
+.finals .result {
+    background: #0c2428;
+    border-color: #37645f;
+}
+
+.finals .result strong {
+    color: var(--accent);
+    font-size: 23px;
+}
+
+.share-result {
+    margin-top: 16px;
+    padding: 22px;
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #102d2c, #13243a);
+    text-align: center;
+}
+
+.share-result span {
+    display: block;
+    color: #b8eadd;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.share-result strong {
+    display: block;
+    color: var(--accent);
+    font-size: 30px;
+}
+
+.note {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+button {
+    padding: 11px 18px;
+    border: 1px solid #40516c;
+    border-radius: 9px;
+    background: #1c2940;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #293b59;
+}
+
+@media(max-width:480px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .result {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .result strong {
+        text-align: left;
+    }
+
+    .share-result strong {
+        font-size: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+<header>
+    <div class="eyebrow">LIVE CALCULATION TOOL</div>
+
+    <h1>INR ⇄ AED ⇄ USDT Calculator</h1>
+
+    <p class="sub">
+        Enter your rates and amounts. All calculations update automatically.
+    </p>
+</header>
+
+
+<!-- SECTION 1: UAE AMOUNT AND INR -->
+
+<section class="card">
+
+    <h2 class="section-title">
+        <span class="num">01</span>
+        UAE Amount & INR Conversion
+    </h2>
+
+    <div class="field">
+        <label>OUR INR RATE TO CLIENT (₹ per AED)</label>
+        <input
+            id="inrRate"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Enter INR rate"
+        >
+    </div>
+
+    <div class="field">
+        <label>AED RECEIVED IN UAE (AED)</label>
+        <input
+            id="aedReceived"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Enter AED received"
+        >
+    </div>
+
+    <div class="result">
+        <span>INR TO RECEIVE IN INDIA</span>
+        <strong id="inrTotal">₹0.00</strong>
+    </div>
+
+</section>
+
+
+<!-- SECTION 2: UAE USDT -->
+
+<section class="card">
+
+    <h2 class="section-title">
+        <span class="num">02</span>
+        USDT Available in UAE
+    </h2>
+
+    <div class="field">
+        <label>USDT RATE IN UAE (AED per USDT)</label>
+        <input
+            id="usdtBuyRate"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Enter UAE USDT rate"
+        >
+    </div>
+
+    <div class="result">
+        <span>TOTAL USDT</span>
+        <strong id="totalUsdt">0.00 USDT</strong>
+    </div>
+
+</section>
+
+
+<!-- SECTION 3: INDIA USDT -->
+
+<section class="card">
+
+    <h2 class="section-title">
+        <span class="num">03</span>
+        USDT Required to Fulfil India Amount
+    </h2>
+
+    <div class="field">
+        <label>USDT SELL RATE IN INDIA (INR per USDT)</label>
+        <input
+            id="indiaSellRate"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Enter India USDT sell rate"
+        >
+    </div>
+
+    <div class="result">
+        <span>USDT TO ACQUIRE IN UAE</span>
+        <strong id="usdtAcquire">0.00 USDT</strong>
+    </div>
+
+    <div class="result">
+        <span>DIRHAMS TO BE SPENT ON USDT</span>
+        <strong id="aedSpent">AED 0.00</strong>
+    </div>
+
+</section>
+
+
+<!-- SECTION 4: INDIAN EXPENSE -->
+
+<section class="card">
+
+    <h2 class="section-title">
+        <span class="num">04</span>
+        Indian Expense Calculation
+    </h2>
+
+    <div class="field">
+        <label>INDIAN EXPENSE (INR ₹)</label>
+        <input
+            id="indianExpense"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Enter Indian expense"
+        >
+    </div>
+
+    <div class="field">
+        <label>CURRENT INR / AED RATE (₹ per AED)</label>
+        <input
+            id="currentRate"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Enter current INR / AED rate"
+        >
+    </div>
+
+    <div class="result">
+        <span>INDIAN EXPENSE CONVERTED TO AED</span>
+        <strong id="expenseAed">AED 0.00</strong>
+    </div>
+
+</section>
+
+
+<!-- FINAL PROFIT -->
+
+<section class="finals">
+
+    <h2>FINAL PROFIT</h2>
+
+    <div class="result">
+        <span>FINAL PROFIT IN AED</span>
+        <strong id="profitAed">AED 0.00</strong>
+    </div>
+
+    <div class="result">
+        <span>FINAL USDT PROFIT</span>
+        <strong id="profitUsdt">0.00 USDT</strong>
+    </div>
+
+</section>
+
+
+<!-- TOTAL PROFIT TO SHARE -->
+
+<section class="share-result">
+
+    <span>TOTAL PROFIT TO SHARE IN AED</span>
+
+    <strong id="shareProfit">AED 0.00</strong>
+
+</section>
+
+
+<p class="note">
+    All calculations update automatically.
+    Enter all rates and amounts to get your final profit.
+</p>
+
+
+<div class="actions">
+    <button type="button" onclick="resetCalculator()">
+        Reset All Fields
+    </button>
+</div>
+
+</main>
+
+
+<script>
+
+// INPUT FIELD IDS
+
+const inputIds = [
+    "inrRate",
+    "aedReceived",
+    "usdtBuyRate",
+    "indiaSellRate",
+    "indianExpense",
+    "currentRate"
+];
+
+
+// GET INPUT VALUE
+
+function getValue(id) {
+
+    const value = document.getElementById(id).value;
+
+    if (value.trim() === "") {
+        return 0;
+    }
+
+    const number = Number(value);
+
+    return Number.isFinite(number) && number >= 0
+        ? number
+        : 0;
+}
+
+
+// NUMBER FORMATTING
+
+function format(value) {
+
+    return value.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+}
+
+
+// MAIN CALCULATION FUNCTION
+
+function calculate() {
+
+    // INPUT VALUES
+
+    const inrRate = getValue("inrRate");
+
+    const aedReceived = getValue("aedReceived");
+
+    const usdtRate = getValue("usdtBuyRate");
+
+    const indiaRate = getValue("indiaSellRate");
+
+    const indianExpense = getValue("indianExpense");
+
+    const currentRate = getValue("currentRate");
+
+
+    // 1. INR TO RECEIVE IN INDIA
+
+    const inrToReceive =
+        aedReceived * inrRate;
+
+
+    // 2. TOTAL USDT
+
+    const totalUsdt =
+        usdtRate > 0
+        ? aedReceived / usdtRate
+        : 0;
+
+
+    // 3. USDT TO ACQUIRE IN UAE
+
+    const usdtToAcquire =
+        indiaRate > 0
+        ? inrToReceive / indiaRate
+        : 0;
+
+
+    // 4. DIRHAMS TO BE SPENT ON USDT
+
+    const aedSpent =
+        usdtToAcquire * usdtRate;
+
+
+    // 5. FINAL USDT PROFIT
+
+    const finalUsdtProfit =
+        totalUsdt - usdtToAcquire;
+
+
+    // 6. FINAL PROFIT IN AED
+
+    const finalAedProfit =
+        aedReceived - aedSpent;
+
+
+    // 7. INDIAN EXPENSE CONVERTED INTO AED
+
+    const expenseInAed =
+        currentRate > 0
+        ? indianExpense / currentRate
+        : 0;
+
+
+    // 8. TOTAL PROFIT TO SHARE IN AED
+
+    const totalProfitToShare =
+        finalAedProfit - expenseInAed;
+
+
+    // DISPLAY ALL RESULTS
+
+    document.getElementById("inrTotal").textContent =
+        "₹" + format(inrToReceive);
+
+    document.getElementById("totalUsdt").textContent =
+        format(totalUsdt) + " USDT";
+
+    document.getElementById("usdtAcquire").textContent =
+        format(usdtToAcquire) + " USDT";
+
+    document.getElementById("aedSpent").textContent =
+        "AED " + format(aedSpent);
+
+    document.getElementById("profitUsdt").textContent =
+        format(finalUsdtProfit) + " USDT";
+
+    document.getElementById("profitAed").textContent =
+        "AED " + format(finalAedProfit);
+
+    document.getElementById("expenseAed").textContent =
+        "AED " + format(expenseInAed);
+
+    document.getElementById("shareProfit").textContent =
+        "AED " + format(totalProfitToShare);
+
+}
+
+
+// AUTOMATIC LIVE CALCULATION
+
+inputIds.forEach(id => {
+
+    document.getElementById(id)
+        .addEventListener("input", calculate);
+
+});
+
+
+// RESET ALL INPUTS
+
+function resetCalculator() {
+
+    inputIds.forEach(id => {
+
+        document.getElementById(id).value = "";
+
+    });
+
+    calculate();
+
+}
+
+
+// INITIAL CALCULATION
+
+calculate();
+
+</script>
+
+</body>
+</html>
